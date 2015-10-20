@@ -5,6 +5,10 @@
 ._*
 Thumbs.db
 
+
+# Leave IntelliJ alone!
+*.iml
+
 # Files that might appear on external disks
 .Spotlight-V100
 .Trashes
