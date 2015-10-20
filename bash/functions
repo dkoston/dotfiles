@@ -1,0 +1,4 @@
+#Fast change to a sub-folder of dotfiles. Alias this to 'df' or your preference
+change_to_dotfiles_dir(){
+    cd ${HOME}/dotfiles/$1
+}
