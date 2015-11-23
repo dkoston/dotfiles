@@ -1,11 +1,8 @@
 # Navigation
 alias e='exit'
 
-# Sourcing
-alias sbp='source ~/.bash_profile'
-
-# Managing Dotfiles
-alias df="change_to_dotfiles_dir $1"
+# Source all my dotfiles (linked from bash profile)
+alias sdf='source ~/.bash_profile'
 
 # Git 
 alias g='git'
@@ -16,9 +13,13 @@ alias gchb='git checkout -B'
 alias gd='git diff'
 alias gfo='git fetch origin'
 alias gp='git pull'
-alias gpo='git push origin master'
+alias gpom='git pull origin master'
+alias gppb="git push dkoston $(git symbolic-ref --quiet --short HEAD 2> /dev/null || git rev-parse --short HEAD 2> /dev/null)"
+alias gppo='git push origin master'
 alias gs='git status'
 
+# JSON
+alias jlint="json_lint $1"
 
 #auto completion for git aliases
 #alias git to g

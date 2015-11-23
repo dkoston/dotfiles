@@ -1,6 +1,1 @@
-#Help specific
-quick_change_help_repos(){
-    cd ${HOME}/hdc-repos/$1
-}
-alias h="quick_change_help_repos $1"
-complete -o nospace -F _cd h
+# Add job specific stuff here

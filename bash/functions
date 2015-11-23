@@ -1,4 +1,17 @@
 #Fast change to a sub-folder of dotfiles. Alias this to 'df' or your preference
-change_to_dotfiles_dir(){
+df(){
     cd ${HOME}/dotfiles/$1
+}
+_cddf() {
+    local cur opts
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    opts=$(cd ~/dotfiles; ls -d * | sed 's|/./||')
+    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+}
+complete -F _cddf df
+
+
+#Json Lint
+json_lint(){
+  echo "$1" | python -mjson.tool
 }
