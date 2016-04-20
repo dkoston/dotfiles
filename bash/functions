@@ -27,7 +27,6 @@ docker_id(){
 }
 
 
-
 #Enter a docker container
 docker_enter_id(){
     if [[ "$1" == "" ]]; then
@@ -54,6 +53,9 @@ docker_enter(){
         docker exec -it $DOCKERID bash
     fi
 }
+
+# Add tab completion for container names to docker commands
+complete -o "default" -o "nospace" -W "$(docker ps --format \"{{.Names}}\")" docker docker_enter docker_enter_id docker_id;
 
 
 #Json Lint
