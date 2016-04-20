@@ -18,8 +18,11 @@ alias gppb="git push dkoston $(git symbolic-ref --quiet --short HEAD 2> /dev/nul
 alias gppo='git push origin master'
 alias gs='git status'
 
-# JSON
-alias jlint="json_lint $1"
+
+# Docker
+alias docker_rmc='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+alias docker_rmi='docker rmi -f $(docker images | grep "<none>" | awk "{print \$3}")'
+
 
 #auto completion for git aliases
 #alias git to g
