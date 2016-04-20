@@ -29,7 +29,7 @@ docker_id(){
 
 
 #Enter a docker container
-docker_enter(){
+docker_enter_id(){
     if [[ "$1" == "" ]]; then
 	echo "you need to specify a container id"
 	echo "Usage: enter <container_id>"
@@ -42,7 +42,7 @@ docker_enter(){
 }
 
 #Enter a docker container by name match
-docker_enid(){
+docker_enter(){
     if [[ "$1" == "" ]]; then
 	echo "you need to specify a string to match the container name against"
 	echo "Usage: docker_enter_id <match>"
