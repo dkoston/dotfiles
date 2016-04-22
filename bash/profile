@@ -7,7 +7,7 @@ elif [ -f /etc/bash_completion ]; then
 fi;
 
 # Load the shell dotfiles, and then some:
-for file in ${HOME}/dotfiles/bash/{functions,aliases,environment,extras,prompt}; do
+for file in ${HOME}/dotfiles/bash/{aliases,environment,extras,prompt,functions}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
