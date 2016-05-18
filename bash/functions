@@ -87,6 +87,22 @@ docker_rm_image(){
   docker rmi $1
 }
 
+# clean up all stopped containers
+docker_remove_stopped(){
+  for i in $(docker ps -a | awk '{print $1}' | grep -v CONTAINER); do
+      docker rm ${i}
+  done
+  echo "All stopped containers removed"
+}
+
+# clean up unused images
+docker_remove_images(){
+  for i in $(docker images | grep "<none>" | awk '{print $3}'); do
+      docker rmi ${i}
+  done
+  echo "All unused images removed"
+}
+
 # Add tab completion for container names to docker commands
 complete -o "default" -o "nospace" -W "$(docker ps --format \"{{.Names}}\")" docker docker_enter docker_enter_id docker_id docker_rm;
 complete -o "default" -o "nospace" -W "$(docker images --format \"{{.ID}}\")" docker_rm_image;
