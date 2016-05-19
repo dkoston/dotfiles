@@ -103,6 +103,14 @@ docker_remove_images(){
   echo "All unused images removed"
 }
 
+# remove all docker containers
+docker_remove_all_containers(){
+  for i in $(docker ps -a | awk '{print $1}' | grep -v CONTAINER); do
+      docker rm -f ${i}
+  done
+  echo "All containers removed"
+}
+
 # Add tab completion for container names to docker commands
 complete -o "default" -o "nospace" -W "$(docker ps --format \"{{.Names}}\")" docker docker_enter docker_enter_id docker_id docker_rm;
 complete -o "default" -o "nospace" -W "$(docker images --format \"{{.ID}}\")" docker_rm_image;
