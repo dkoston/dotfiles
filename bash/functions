@@ -10,6 +10,12 @@ _cddf() {
 }
 complete -F _cddf df
 
+# Git
+# git push --force origin <branch> (cannot do master)
+gfpo(){
+    git push --force origin $(git branch | grep -v master | awk '{print $2'})
+}
+
 
 # DOCKER
 
@@ -107,6 +113,7 @@ docker_remove_images(){
 docker_remove_all_containers(){
   for i in $(docker ps -a | awk '{print $1}' | grep -v CONTAINER); do
       docker rm -f ${i}
+      sleep 1
   done
   echo "All containers removed"
 }
@@ -114,6 +121,12 @@ docker_remove_all_containers(){
 # Add tab completion for container names to docker commands
 complete -o "default" -o "nospace" -W "$(docker ps --format \"{{.Names}}\")" docker docker_enter docker_enter_id docker_id docker_rm;
 complete -o "default" -o "nospace" -W "$(docker images --format \"{{.ID}}\")" docker_rm_image;
+
+# Fix Docker for Mac QCow Image
+docker_fix_qcow(){
+  rm ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2
+  /Applications/Docker.app/Contents/MacOS/qemu-img create ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2 64G
+}
 
 
 #Json Lint

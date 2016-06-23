@@ -1,8 +1,16 @@
 # Navigation
 alias e='exit'
 
+# I use df for my dotfiles
+alias ldf=$(which df)
+
 # Source all my dotfiles (linked from bash profile)
 alias sdf='source ~/.bash_profile'
+
+# Npm
+alias ni='npm install'
+alias nt='npm test'
+alias ns='npm start'
 
 # Git
 alias g='git'
