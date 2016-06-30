@@ -109,6 +109,11 @@ docker_remove_images(){
   echo "All unused images removed"
 }
 
+# remove all docker images
+docker_remove_all_images(){
+  docker rmi $(docker images -q)
+}
+
 # remove all docker containers
 docker_remove_all_containers(){
   for i in $(docker ps -a | awk '{print $1}' | grep -v CONTAINER); do
