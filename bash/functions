@@ -16,6 +16,10 @@ gfpo(){
     git push --force origin $(git branch | grep -v master | awk '{print $2'})
 }
 
+#git push origin ${branch_name}
+gpob(){
+    git push origin $(git branch | grep -v master | awk '{print $2'})
+}
 
 # DOCKER
 
