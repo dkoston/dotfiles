@@ -11,14 +11,9 @@ _cddf() {
 complete -F _cddf df
 
 # Git
-# git push --force origin <branch> (cannot do master)
-gfpo(){
-    git push --force origin $(git branch | grep -v master | awk '{print $2'})
-}
-
-#git push origin ${branch_name}
-gpob(){
-    git push origin $(git branch | grep -v master | awk '{print $2'})
+#git rebase HEAD~${n}
+grih(){
+  git rebase -i HEAD~$1
 }
 
 # DOCKER
@@ -113,12 +108,6 @@ docker_garbage_collect(){
 # Add tab completion for container names to docker commands
 complete -o "default" -o "nospace" -W "$(docker ps --format \"{{.Names}}\")" docker docker_enter docker_enter_id docker_id docker_rm;
 complete -o "default" -o "nospace" -W "$(docker images --format \"{{.ID}}\")" docker_rm_image;
-
-# Fix Docker for Mac QCow Image
-docker_fix_qcow(){
-  rm ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2
-  /Applications/Docker.app/Contents/MacOS/qemu-img create ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/Docker.qcow2 64G
-}
 
 
 #Json Lint
