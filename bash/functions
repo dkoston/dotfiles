@@ -16,6 +16,11 @@ grih(){
   git rebase -i HEAD~$1
 }
 
+# git pull -r $this_branch (allows master)
+gp(){
+  git pull -r origin $(git branch | awk '{print $2'}) 
+}
+
 #git push origin $this_branch (does not allow master)
 gpo(){
   git push origin $(git branch | grep -v master | awk '{print $2'})

@@ -23,7 +23,6 @@ alias gchb='git checkout -B'
 alias gd='git diff'
 alias gfo='git fetch origin'
 alias gi='git init'
-alias gp="git pull -r origin $(git symbolic-ref --quiet --short HEAD 2> /dev/null || git rev-parse --short HEAD 2> /dev/null)"
 alias gs='git status'
 alias gl='git log'
 
