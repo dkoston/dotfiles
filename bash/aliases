@@ -7,6 +7,10 @@ alias ldf=$(which df)
 # Source all my dotfiles (linked from bash profile)
 alias sdf='source ~/.bash_profile'
 
+
+# Docker
+alias de='docker_enter'
+
 # Npm
 alias ni='npm install'
 alias nl='npm link .'
