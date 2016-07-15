@@ -16,6 +16,16 @@ grih(){
   git rebase -i HEAD~$1
 }
 
+#git push origin $this_branch (does not allow master)
+gpo(){
+  git push origin $(git branch | grep -v master | awk '{print $2'})
+}
+
+#git push --force origin $this_branch (does not allow master)
+gfpo(){
+  git push --force origin $(git branch | grep -v master | awk '{print $2'})
+}
+
 # DOCKER
 
 # Get a container's id by name match

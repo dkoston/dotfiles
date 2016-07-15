@@ -22,10 +22,8 @@ alias gch='git checkout'
 alias gchb='git checkout -B'
 alias gd='git diff'
 alias gfo='git fetch origin'
-alias gfpo="git push --force origin $(git branch | grep -v master | awk '{print $2'})"
 alias gi='git init'
 alias gp="git pull -r origin $(git symbolic-ref --quiet --short HEAD 2> /dev/null || git rev-parse --short HEAD 2> /dev/null)"
-alias gpo="git push origin $(git branch | grep -v master | awk '{print $2'})"
 alias gs='git status'
 alias gl='git log'
 
@@ -35,7 +33,7 @@ complete -o bashdefault -o default -o nospace -F _git g 2>/dev/null \
     || complete -o default -o nospace -F _git g
 __git_complete gch _git_checkout
 __git_complete gp _git_pull
-__git_complete gpo _git_push
+#__git_complete gpo _git_push
 
 # Empty the Trash on all mounted volumes and the main HDD.
 # Also, clear Apple’s System Logs to improve shell startup speed.
