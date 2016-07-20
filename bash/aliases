@@ -38,6 +38,13 @@ __git_complete gch _git_checkout
 __git_complete gp _git_pull
 #__git_complete gpo _git_push
 
+
+#k8s
+alias kc='kubectl'
+alias kc-pods='kubectl get pods'
+alias kc-deployments='kubectl get deployments'
+alias kc-events='kubectl get events'
+
 # Empty the Trash on all mounted volumes and the main HDD.
 # Also, clear Apple’s System Logs to improve shell startup speed.
 # Finally, clear download history from quarantine. https://mths.be/bum

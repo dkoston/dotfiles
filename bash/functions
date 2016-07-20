@@ -125,6 +125,21 @@ complete -o "default" -o "nospace" -W "$(docker ps --format \"{{.Names}}\")" doc
 complete -o "default" -o "nospace" -W "$(docker images --format \"{{.ID}}\")" docker_rm_image;
 
 
+# k8s
+kc-deployments-ns(){
+  kubectl get deployments --namespace=$1
+}
+
+kc-events-ns(){
+  kubectl get events --namespace=$1
+}
+
+kc-pods-ns(){
+  kubectl get pods --namespace=$1
+}
+
+
+
 #Json Lint
 json_lint(){
   echo "$1" | python -mjson.tool
