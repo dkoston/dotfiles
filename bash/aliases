@@ -27,8 +27,11 @@ alias gchb='git checkout -B'
 alias gd='git diff'
 alias gfo='git fetch origin'
 alias gi='git init'
-alias gs='git status'
 alias gl='git log'
+alias grc='git rebase --continue'
+alias grm='git pull -r origin master'
+alias gs='git status'
+
 
 #auto completion for git aliases
 #alias git to g
