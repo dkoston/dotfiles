@@ -18,6 +18,10 @@ alias ns='npm start'
 alias nt='npm test'
 alias nut='npm test:unit'
 
+
+# Node
+alias node_ifconfig="node -pe 'os.networkInterfaces()'"
+
 # Git
 alias g='git'
 alias gad='git add .'
