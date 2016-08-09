@@ -33,10 +33,14 @@ alias gfo='git fetch origin'
 alias gi='git init'
 alias gl='git log'
 alias gpom='git push origin master'
+alias gprm='git pull -r origin master'
 alias grc='git rebase --continue'
+alias gri='gir rebase -i'
 alias grm='git pull -r origin master'
 alias gs='git status'
 alias gfi='git-fixit'
+
+
 
 #auto completion for git aliases
 #alias git to g
