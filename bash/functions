@@ -119,6 +119,13 @@ docker_garbage_collect(){
   docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc
 }
 
+#Remove all custom docker networks
+docker_remove_networks(){
+  for i in $(docker network ls -f type=custom | grep -v NAME | awk '{print $1}'); do
+    docker network rm ${i}
+  done
+}
+
 
 # Add tab completion for container names to docker commands
 complete -o "default" -o "nospace" -W "$(docker ps --format \"{{.Names}}\")" docker docker_enter docker_enter_id docker_id docker_rm;
