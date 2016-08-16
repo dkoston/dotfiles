@@ -149,6 +149,10 @@ kc-logs-ns(){
   kubectl logs --namespace=$1 $2
 }
 
+kc-enter-ns(){
+  kubectl exec --namespace=$1 -it $2 bash
+}
+
 
 #Json Lint
 json_lint(){
