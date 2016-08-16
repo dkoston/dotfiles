@@ -145,6 +145,9 @@ kc-pods-ns(){
   kubectl get pods --namespace=$1
 }
 
+kc-logs-ns(){
+  kubectl logs --namespace=$1 $2
+}
 
 
 #Json Lint
