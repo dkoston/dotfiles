@@ -146,13 +146,16 @@ kc-pods-ns(){
 }
 
 kc-logs-ns(){
-  kubectl logs --namespace=$1 $2
+  kubectl logs -f --namespace=$1 $2
 }
 
 kc-enter-ns(){
   kubectl exec --namespace=$1 -it $2 bash
 }
 
+kc-describe-pod-ns(){
+  kubectl describe pod --namespace=$1 $2
+}
 
 #Json Lint
 json_lint(){

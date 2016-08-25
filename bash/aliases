@@ -7,6 +7,8 @@ alias ldf=$(which df)
 # Source all my dotfiles (linked from bash profile)
 alias sdf='source ~/.bash_profile'
 
+# GMT all your dates
+alias date='date -u'
 
 # Docker
 alias de='docker_enter'
