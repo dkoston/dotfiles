@@ -150,7 +150,7 @@ kc-logs-ns(){
 }
 
 kc-enter-ns(){
-  kubectl exec --namespace=$1 -it $2 bash
+  kubectl exec --namespace=$1 -it $2 env COLUMNS=200 LINES=300 TERM=xterm bash
 }
 
 kc-describe-pod-ns(){
