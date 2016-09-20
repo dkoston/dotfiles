@@ -157,6 +157,11 @@ kc-describe-pod-ns(){
   kubectl describe pod --namespace=$1 $2
 }
 
+kc-delete-pod-ns(){
+  kubectl delete pod --namespace=$1 $2
+}
+
+
 #Json Lint
 json_lint(){
   echo "$1" | python -mjson.tool
