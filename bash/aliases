@@ -12,6 +12,8 @@ alias date='date -u'
 
 # Docker
 alias de='docker_enter'
+alias dpsa='docker ps -a'
+alias dps='docker ps'
 
 # Npm
 alias ni='npm install'
