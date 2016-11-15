@@ -43,7 +43,7 @@ alias gri='gir rebase -i'
 alias grm='git pull -r origin master'
 alias gs='git status'
 alias gfi='git-fixit'
-
+alias gfl='git add . && gc -m "fixup last commit" && gfi 2 && gfpo'
 
 
 #auto completion for git aliases

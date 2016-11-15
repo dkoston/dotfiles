@@ -161,6 +161,11 @@ kc-delete-pod-ns(){
   kubectl delete pod --namespace=$1 $2
 }
 
+kc-delete-namespace-contents(){
+  kc delete deployment --all -n=$1 && kc delete svc --all -n=$1 && kc delete pod --all -n=$1 && kc delete job --all -n=$1
+}
+
+
 
 #Json Lint
 json_lint(){
