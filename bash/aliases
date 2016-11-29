@@ -14,6 +14,7 @@ alias date='date -u'
 alias de='docker_enter'
 alias dpsa='docker ps -a'
 alias dps='docker ps'
+alias docker-stopped='docker ps -a | grep Exited'
 
 # Npm
 alias ni='npm install'
