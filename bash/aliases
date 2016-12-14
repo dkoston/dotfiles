@@ -16,6 +16,9 @@ alias dpsa='docker ps -a'
 alias dps='docker ps'
 alias docker-stopped='docker ps -a | grep Exited'
 
+# Helm
+alias hlem='helm'
+
 # Npm
 alias ni='npm install'
 alias nl='npm link .'
