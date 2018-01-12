@@ -2,8 +2,18 @@
 BCPATH="$(brew --prefix)/etc/bash_completion"
 if which brew > /dev/null && [ -f "$BCPATH" ]; then
 	source "$BCPATH";
-elif [ -f /etc/bash_completion ]; then
-	source /etc/bash_completion;
+	if [ -f "$BCPATH.d/git-prompt.sh" ]; then
+		source "$BCPATH.d/git-prompt.sh";
+	else
+		echo "WARNING. GIT NOT INSTALLED VIA HOMEBREW";
+		echo "INSTALLING";
+		brew uninstall bash-completion;
+		brew install git bash-completion;
+	fi
+else
+	echo "WARNING. BASH COMPLETION NOT INSTALLED.";
+	brew install git bash-completion;
+	exit;
 fi;
 
 # Load the shell dotfiles, and then some:
