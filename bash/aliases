@@ -63,6 +63,10 @@ alias kc='kubectl'
 alias kc-pods='kubectl get pods'
 alias kc-deployments='kubectl get deployments'
 alias kc-events='kubectl get events'
+alias kgp='kubectl get pods'
+alias kdp='kubectl describe pod'
+alias klf='kubectl logs -f'
+
 
 # Empty the Trash on all mounted volumes and the main HDD.
 # Also, clear Apple’s System Logs to improve shell startup speed.
