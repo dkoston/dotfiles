@@ -12,7 +12,7 @@ alias date='date -u'
 
 # Docker
 alias de='docker_enter'
-alias dpsa='docker ps -a'
+alias dpa='docker ps -a'
 alias dps='docker ps'
 alias docker-stopped='docker ps -a | grep Exited'
 
@@ -63,10 +63,10 @@ alias kc='kubectl'
 alias kc-pods='kubectl get pods'
 alias kc-deployments='kubectl get deployments'
 alias kc-events='kubectl get events'
-alias kgp='kubectl get pods'
+alias kp='kubectl get pods'
 alias kdp='kubectl describe pod'
-alias klf='kubectl logs -f'
-
+alias kl='kubectl logs -f'
+alias ke='kc-enter-ns default'
 
 # Empty the Trash on all mounted volumes and the main HDD.
 # Also, clear Apple’s System Logs to improve shell startup speed.
