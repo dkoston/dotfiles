@@ -26,6 +26,8 @@ alias ns='npm start'
 alias nt='npm test'
 alias nut='npm test:unit'
 
+# Golang
+alias gofmtall='gofmt -w ./..'
 
 # Node
 alias node_ifconfig="node -pe 'os.networkInterfaces()'"
