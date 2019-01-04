@@ -27,7 +27,7 @@ alias nt='npm test'
 alias nut='npm test:unit'
 
 # Golang
-alias gofmtall='gofmt -w ./..'
+alias gofmtall='gofmt -w ./.'
 
 # Node
 alias node_ifconfig="node -pe 'os.networkInterfaces()'"
@@ -68,6 +68,7 @@ alias kp='kubectl get pods'
 alias kdp='kubectl describe pod'
 alias kl='kubectl logs -f'
 alias ke='kc-enter-ns default'
+alias kpk='kp --namespace=kube-system'
 
 # Empty the Trash on all mounted volumes and the main HDD.
 # Also, clear Apple’s System Logs to improve shell startup speed.
