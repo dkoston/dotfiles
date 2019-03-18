@@ -70,6 +70,12 @@ alias kl='kubectl logs -f'
 alias ke='kc-enter-ns default'
 alias kpk='kp --namespace=kube-system'
 
+#terraform
+alias ta="terraform apply"
+alias td="terraform destroy"
+alias tp="terraform plan"
+
+
 # Empty the Trash on all mounted volumes and the main HDD.
 # Also, clear Apple’s System Logs to improve shell startup speed.
 # Finally, clear download history from quarantine. https://mths.be/bum
