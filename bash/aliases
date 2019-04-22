@@ -68,7 +68,9 @@ alias kp='kubectl get pods'
 alias kdp='kubectl describe pod'
 alias kl='kubectl logs -f'
 alias ke='kc-enter-ns default'
+alias kpa='kp --all-namespaces'
 alias kpk='kp --namespace=kube-system'
+
 
 #terraform
 alias ta="terraform apply"
