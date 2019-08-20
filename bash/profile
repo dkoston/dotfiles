@@ -26,7 +26,7 @@ done;
 
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/dave/Downloads/google-cloud-sdk/path.bash.inc' ]; then source '/Users/dave/Downloads/google-cloud-sdk/path.bash.inc'; fi
+if [ -f '/Users/dave/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/dave/Downloads/google-cloud-sdk/path.bash.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/dave/Downloads/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/dave/Downloads/google-cloud-sdk/completion.bash.inc'; fi
+if [ -f '/Users/dave/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/dave/Downloads/google-cloud-sdk/completion.bash.inc'; fi
