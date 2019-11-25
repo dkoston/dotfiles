@@ -60,7 +60,7 @@ docker_enter_id(){
     fi
 }
 
-#Enter a docker container by name or ID match
+#Enter a docker container by name or ID match (bash)
 docker_enter(){
     if [[ "$1" == "" ]]; then
 	    echo "you need to specify a string to match the container name against"
@@ -71,6 +71,20 @@ docker_enter(){
     else
 	    DOCKERID=$(docker ps | grep "$1" | sed 's/|/ /' | awk '{print $1}' 2>&1)
       docker exec -it $DOCKERID bash
+    fi
+}
+
+#Enter a docker container by name or ID match (ash)
+docker_enter_alpine(){
+    if [[ "$1" == "" ]]; then
+	    echo "you need to specify a string to match the container name against"
+	    echo "Usage: docker_enter <match>"
+	    echo "--------------------------------"
+	    echo "available containers:"
+	    docker ps
+    else
+	    DOCKERID=$(docker ps | grep "$1" | sed 's/|/ /' | awk '{print $1}' 2>&1)
+      docker exec -it $DOCKERID ash
     fi
 }
 

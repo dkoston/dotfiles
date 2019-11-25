@@ -12,6 +12,7 @@ alias date='date -u'
 
 # Docker
 alias de='docker_enter'
+alias dea='docker_enter_alpine'
 alias dpa='docker ps -a'
 alias dps='docker ps'
 alias docker-stopped='docker ps -a | grep Exited'
