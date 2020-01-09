@@ -17,6 +17,9 @@ alias dpa='docker ps -a'
 alias dps='docker ps'
 alias docker-stopped='docker ps -a | grep Exited'
 
+#Bash
+alias stripnewlines="tr -d '\n'"
+
 # Helm
 alias hlem='helm'
 

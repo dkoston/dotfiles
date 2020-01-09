@@ -6,5 +6,6 @@ My dotfiles
 2. ./bootstrap.sh
 
 ## Assumptions
-1. You're leaving this directory named dotfiles
-2. You've cloned this repo into ~/
+1. You have bash installed
+2. You're leaving this directory named dotfiles
+3. You've cloned this repo into ~/

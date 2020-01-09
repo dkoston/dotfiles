@@ -1,4 +1,18 @@
-export NODE_PATH="$(brew --prefix)/Cellar/node/4.2.0/libexec/npm/lib"
-export GOPATH=/Users/dave/go
-export RUSTBIN=$HOME/.cargo/bin
-export PATH=$PATH:$GOPATH/bin:$RUSTBIN:/usr/local/sbin
+# Set path based on languages installed on system
+CARGOPATH=$(which cargo)
+if [[ "$CARGOPATH" != "" ]]; then
+    export RUSTBIN=$HOME/.cargo/bin
+    PATH=$PATH:$RUSTBIN
+fi
+
+GOBIN=$(which go)
+if [[ "$GOBIN" != "" ]]; then
+    #exporting of gopath is done in extras
+    if [[ "$GOPATH" != "" ]]; then
+        PATH=$PATH:$GOPATH/bin
+    else
+        echo "GOPATH not set!"
+    fi
+fi
+
+export PATH=$PATH:/usr/local/sbin
