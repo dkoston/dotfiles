@@ -17,9 +17,12 @@ else
 fi;
 
 # Load the shell dotfiles, and then some:
-for file in ${HOME}/dotfiles/bash/{aliases,extras,environment,prompt,functions}; do
+for file in ${HOME}/dotfiles/common/{aliases,extras,environment,functions.zsh}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
+
+source "${HOME}/dotfiles/bash/autocomplete.sh"
+source "${HOME}/dotfiles/bash/prompt"
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;

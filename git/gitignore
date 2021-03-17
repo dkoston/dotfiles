@@ -8,7 +8,7 @@ Thumbs.db
 
 # Leave IntelliJ alone!
 *.iml
-.idea
+.idea/
 
 # Files that might appear on external disks
 .Spotlight-V100

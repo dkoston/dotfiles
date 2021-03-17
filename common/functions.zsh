@@ -1,40 +1,41 @@
-#Fast change to a sub-folder of dotfiles. Alias this to 'df' or your preference
-df(){
-    cd ${HOME}/dotfiles/$1
-}
-_cddf() {
+#Fast change to a sub-folder of dotfiles. Alias this to 'df' via autocomplete.sh
+function _cddf() {
     local cur opts
     cur="${COMP_WORDS[COMP_CWORD]}"
-    opts=$(cd ~/dotfiles; ls -d * | sed 's|/./||')
+    opts=$(cd ~/dotfiles || exit; ls -d * | sed 's|/./||')
     COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 }
-complete -F _cddf df
 
 # Git
 #git rebase HEAD~${n}
-grih(){
-  git rebase -i HEAD~$1
+function grih(){
+  git rebase -i HEAD~"$1"
 }
 
 # git pull -r $this_branch (allows master)
-gp(){
-  git pull -r origin $(git branch | awk '{print $2'}) 
+function _gp(){
+  git pull -r origin "$(git branch | awk '{print $2}')"
 }
 
 #git push origin $this_branch (does not allow master)
-gpo(){
-  git push origin $(git branch | grep -v master | awk '{print $2'})
+function gpo(){
+  git push origin "$(git branch | grep -v master | awk '{print $2}')"
 }
 
 #git push --force origin $this_branch (does not allow master)
-gfpo(){
-  git push --force origin $(git branch | grep -v master | awk '{print $2'})
+function gfpo(){
+  git push --force origin "$(git branch | grep -v master | awk '{print $2}')"
 }
 
 # DOCKER
+# get all containers and IPs
+function dips() {
+    docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'
+}
+
 
 # Get a container's id by name match
-docker_id(){
+function docker_id(){
     if [[ "$1" == "" ]]; then
 	    echo "you need to specify a string to match the container name against"
 	    echo "Usage: docker_id <match>"
@@ -48,7 +49,7 @@ docker_id(){
 
 
 #Enter a docker container
-docker_enter_id(){
+function docker_enter_id(){
     if [[ "$1" == "" ]]; then
 	echo "you need to specify a container id"
 	echo "Usage: docker_enter_id <container_id>"
@@ -56,12 +57,12 @@ docker_enter_id(){
 	echo "available containers:"
 	docker ps
     else
-        docker exec -it $1 bash
+        docker exec -it "$1" bash
     fi
 }
 
 #Enter a docker container by name or ID match (bash)
-docker_enter(){
+function docker_enter(){
     if [[ "$1" == "" ]]; then
 	    echo "you need to specify a string to match the container name against"
 	    echo "Usage: docker_enter <match>"
@@ -70,12 +71,12 @@ docker_enter(){
 	    docker ps
     else
 	    DOCKERID=$(docker ps | grep "$1" | sed 's/|/ /' | awk '{print $1}' 2>&1)
-      docker exec -it $DOCKERID bash
+      docker exec -it "$DOCKERID" bash
     fi
 }
 
 #Enter a docker container by name or ID match (ash)
-docker_enter_alpine(){
+function docker_enter_alpine(){
     if [[ "$1" == "" ]]; then
 	    echo "you need to specify a string to match the container name against"
 	    echo "Usage: docker_enter <match>"
@@ -84,12 +85,12 @@ docker_enter_alpine(){
 	    docker ps
     else
 	    DOCKERID=$(docker ps | grep "$1" | sed 's/|/ /' | awk '{print $1}' 2>&1)
-      docker exec -it $DOCKERID ash
+      docker exec -it "$DOCKERID" ash
     fi
 }
 
 # Delete docker container by name
-docker_rm(){
+function docker_rm(){
   if [[ "$1" == "" ]]; then
     echo "you need to specify a string to match the container name against"
     echo "Usage: docker_rm <match>"
@@ -98,12 +99,29 @@ docker_rm(){
     docker ps
   else
     DOCKERID=$(docker ps | grep "$1" | sed 's/|/ /' | awk '{print $1}' 2>&1)
-    docker rm -f $DOCKERID
+    docker rm -f "$DOCKERID"
   fi
 }
 
+
+#Tail container logs by partial string match of name
+function docker_logs(){
+  if [[ "$1" == "" ]]; then
+    echo "you need to specify a string to match the container name against"
+    echo "Usage: docker_logs <match>"
+    echo "--------------------------------"
+    echo "available containers:"
+    docker ps
+  else
+   DOCKERID=$(docker ps | grep "$1" | awk '{print $1}' | head -n 1 2>&1)
+   docker logs -f "$DOCKERID"
+  fi
+}
+
+
+
 # clean up unused images
-docker_remove_images(){
+function docker_remove_images(){
   for i in $(docker images | grep "<none>" | awk '{print $3}'); do
       docker rmi ${i}
   done
@@ -111,88 +129,82 @@ docker_remove_images(){
 }
 
 # remove all docker images
-docker_remove_all_images(){
-  docker rmi $(docker images -q)
+function docker_remove_all_images(){
+  docker rmi "$(docker images -q)"
 }
 
 # remove all docker containers
-docker_remove_all_containers(){
-  docker rm -f $(docker ps -a -q)
+function docker_remove_all_containers(){
+  docker rm -f "$(docker ps -a -q)"
 }
 
 # remove all stopped docker containers
-docker_remove_stopped(){
+function docker_remove_stopped(){
   for i in $(docker ps -a --filter "status=exited" --format "{{.ID}}"); do
-    docker rm ${i}
+    docker rm "${i}"
   done
   echo "All stopped containers removed"
 }
 
 # Delete all old unused containers and images
-docker_garbage_collect(){
+function docker_garbage_collect(){
   docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc
 }
 
 #Remove all custom docker networks
-docker_remove_networks(){
+function docker_remove_networks(){
   for i in $(docker network ls -f type=custom | grep -v NAME | awk '{print $1}'); do
-    docker network rm ${i}
+    docker network rm "${i}"
   done
 }
 
-
-# Add tab completion for container names to docker commands
-complete -o "default" -o "nospace" -W "$(docker ps --format \"{{.Names}}\")" docker docker_enter docker_enter_id docker_id docker_rm;
-complete -o "default" -o "nospace" -W "$(docker images --format \"{{.ID}}\")" docker_rm_image;
-
-
 # k8s
-kc-deployments-ns(){
-  kubectl get deployments --namespace=$1
+function kc-deployments-ns(){
+  kubectl get deployments --namespace="$1"
 }
 
-kc-events-ns(){
-  kubectl get events --namespace=$1
+function kc-events-ns(){
+  kubectl get events --namespace="$1"
 }
 
-kc-pods-ns(){
-  kubectl get pods --namespace=$1
+function kc-pods-ns(){
+  kubectl get pods --namespace="$1"
 }
 
-kc-logs-ns(){
-  kubectl logs -f --namespace=$1 $2
+function kc-logs-ns(){
+  kubectl logs -f --namespace="$1" "$2"
 }
 
-kc-enter-ns(){
+function kc-enter-ns(){
   COMMAND=/bin/ash
   if [[ "$3" != "" ]]; then
     COMMAND=$3
   fi
 
-  kubectl exec --namespace=$1 -it $2 env COLUMNS=200 LINES=300 TERM=xterm ${COMMAND} 
+  kubectl exec --namespace="$1" -it "$2" env COLUMNS=200 LINES=300 TERM=xterm ${COMMAND}
 }
 
-keb() {
+function keb() {
   kc-enter-ns default $1 bash
 }
 
 
 
-kc-describe-pod-ns(){
-  kubectl describe pod --namespace=$1 $2
+function kc-describe-pod-ns(){
+  kubectl describe pod --namespace="$1" "$2"
 }
 
-kc-delete-pod-ns(){
-  kubectl delete pod --namespace=$1 $2
+function kc-delete-pod-ns(){
+  kubectl delete pod --namespace="$1" "$2"
 }
 
-kc-delete-namespace-contents(){
-  kc delete deployment --all -n=$1 && kc delete svc --all -n=$1 && kc delete pod --all -n=$1 && kc delete job --all -n=$1
+function kc-delete-namespace-contents(){
+  kc delete deployment --all -n="$1" && kc delete svc --all -n="$1" && kc delete pod --all -n="$1" && kc delete job --all -n="$1"
 }
 
 
 
 #Json Lint
-json_lint(){
+function json_lint(){
   echo "$1" | python -mjson.tool
 }

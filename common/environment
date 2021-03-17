@@ -6,13 +6,9 @@ if [[ "$CARGOPATH" != "" ]]; then
 fi
 
 GOBIN=$(which go)
+GOPATH=~/go
 if [[ "$GOBIN" != "" ]]; then
-    #exporting of gopath is done in extras
-    if [[ "$GOPATH" != "" ]]; then
-        PATH=$PATH:$GOPATH/bin
-    else
-        echo "GOPATH not set!"
-    fi
+    PATH=$PATH:$GOPATH/bin
 fi
 
-export PATH=$PATH:/usr/local/sbin
+export PATH=$PATH:/usr/local/bin:/usr/local/sbin

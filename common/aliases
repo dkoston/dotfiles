@@ -16,6 +16,8 @@ alias dea='docker_enter_alpine'
 alias dpa='docker ps -a'
 alias dps='docker ps'
 alias docker-stopped='docker ps -a | grep Exited'
+alias dl='docker_logs'
+alias drc='docker ps | grep docker_ | awk '{print $1}' | xargs docker restart'
 
 #Bash
 alias stripnewlines="tr -d '\n'"
@@ -54,13 +56,6 @@ alias grm='git pull -r origin master'
 alias gs='git status'
 alias gfi='git-fixit'
 alias gfl='git add . && gc -m "fixup last commit" && gfi 2 && gfpo'
-
-
-#auto completion for git aliases
-__git_complete g __git_main
-__git_complete gch _git_checkout
-__git_complete gp _git_pull
-
 
 
 #k8s
