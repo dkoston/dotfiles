@@ -6,26 +6,71 @@ function _cddf() {
     COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 }
 
+
+# source these dotfiles (bash or zsh)
+function sdf() {
+  SHELL=$0
+  if [[ "$SHELL" == "-bash" ]]; then
+    source ~/.bash_profile
+  elif [[ "$SHELL" == "-zsh" ]]; then
+    source ~/.zprofile
+  else
+    echo "Shell ${SHELL} unsupported"
+  fi
+}
+
+
 # Git
 #git rebase HEAD~${n}
 function grih(){
   git rebase -i HEAD~"$1"
 }
 
+# Get current git branch
+function gb(){
+  git branch | grep -v master | grep -v main | grep "\*" | awk '{print $2}'
+}
+
 # git pull -r $this_branch (allows master)
-function _gp(){
-  git pull -r origin "$(git branch | awk '{print $2}')"
+function gp(){
+  git pull -r origin "$(gb)"
 }
 
 #git push origin $this_branch (does not allow master)
 function gpo(){
-  git push origin "$(git branch | grep -v master | awk '{print $2}')"
+  git push origin "$(gb)"
 }
 
-#git push --force origin $this_branch (does not allow master)
+#git push --force origin $this_branch (does not allow master or main)
 function gfpo(){
-  git push --force origin "$(git branch | grep -v master | awk '{print $2}')"
+   git push --force origin "$(gb)"
 }
+
+#git rebase origin main
+function grom() {
+  git rebase origin main
+}
+
+#git rebase origin $this_branch
+function gro() {
+  git rebase origin/"$(gb)"
+}
+
+#grab our changes from origin, add them, and continue rebase
+function grco() {
+  git status | grep both | awk '{print $3}' | xargs git checkout --ours
+  git status | grep both | awk '{print $3}' | xargs git add
+  git rebase --continue
+}
+
+#grab their changes from origin, add them, and continue rebase
+function grco() {
+  git status | grep both | awk '{print $3}' | xargs git checkout --theirs
+  git status | grep both | awk '{print $3}' | xargs git add
+  git rebase --continue
+}
+
+
 
 # DOCKER
 # get all containers and IPs
@@ -33,6 +78,10 @@ function dips() {
     docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'
 }
 
+# restart all containers with docker_ name prefix
+function dcra() {
+ docker ps -a | grep docker_ | awk '{print $1}' | xargs docker restart
+}
 
 # Get a container's id by name match
 function docker_id(){

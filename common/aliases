@@ -3,9 +3,7 @@ alias e='exit'
 
 # I use df for my dotfiles
 alias ldf=$(which df)
-
-# Source all my dotfiles (linked from bash profile)
-alias sdf='source ~/.bash_profile'
+alias df='cd ~/dotfiles'
 
 # GMT all your dates
 alias date='date -u'
@@ -51,8 +49,9 @@ alias gl='git log'
 alias gpom='git push origin master'
 alias gprm='git pull -r origin master'
 alias grc='git rebase --continue'
-alias gri='gir rebase -i'
+alias gri='git rebase -i'
 alias grm='git pull -r origin master'
+alias grs='git rebase --skip'
 alias gs='git status'
 alias gfi='git-fixit'
 alias gfl='git add . && gc -m "fixup last commit" && gfi 2 && gfpo'
