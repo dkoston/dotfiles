@@ -15,7 +15,6 @@ alias dpa='docker ps -a'
 alias dps='docker ps'
 alias docker-stopped='docker ps -a | grep Exited'
 alias dl='docker_logs'
-alias drc='docker ps | grep docker_ | awk '{print $1}' | xargs docker restart'
 
 #Bash
 alias stripnewlines="tr -d '\n'"
