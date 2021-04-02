@@ -10,9 +10,9 @@ function _cddf() {
 # source these dotfiles (bash or zsh)
 function sdf() {
   SHELL=$0
-  if [[ "$SHELL" == "-bash" ]]; then
+  if [[ "$SHELL" == "/bin/bash" ]]; then
     source ~/.bash_profile
-  elif [[ "$SHELL" == "-zsh" ]]; then
+  elif [[ "$SHELL" == "/bin/zsh" ]]; then
     source ~/.zprofile
   else
     echo "Shell ${SHELL} unsupported"
@@ -64,7 +64,7 @@ function grco() {
 }
 
 #grab their changes from origin, add them, and continue rebase
-function grco() {
+function grct() {
   git status | grep both | awk '{print $3}' | xargs git checkout --theirs
   git status | grep both | awk '{print $3}' | xargs git add
   git rebase --continue
@@ -163,7 +163,7 @@ function docker_logs(){
     docker ps
   else
    DOCKERID=$(docker ps | grep "$1" | awk '{print $1}' | head -n 1 2>&1)
-   docker logs -f "$DOCKERID"
+   docker logs --tail 50 -f "$DOCKERID"
   fi
 }
 
