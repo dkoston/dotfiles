@@ -4,6 +4,8 @@
 # the source of truth 
 
 if [[ "$SHELL" == "/bin/zsh" ]]; then
+  echo "Installing oh my ZSH"
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   echo "Installing ZSH custom files for oh my zsh"
   ln -s "$(pwd)/common/aliases" "${HOME}/.oh-my-zsh/custom/aliases.zsh"
   ln -s "$(pwd)/common/environment" "${HOME}/.oh-my-zsh/custom/environment.zsh"

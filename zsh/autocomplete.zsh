@@ -1,5 +1,10 @@
 #Include Extras
-source ~/dotfiles/zsh/extras
+EXTRAS=~/dotfiles/zsh/extras
+if [ -f "$EXTRAS" ]; then
+    source $EXTRAS
+else
+    echo "No extras file found at ${EXTRAS}"
+fi
 
 #auto completion for git aliases
 compdef _gp gp
