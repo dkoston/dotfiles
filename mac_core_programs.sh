@@ -16,3 +16,6 @@ brew install yarn
 
 echo "Installing git-fixit"
 npm install -g git-fixit
+
+echo "Install golangci-lint"
+brew install golangci-lint
