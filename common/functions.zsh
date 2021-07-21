@@ -26,24 +26,19 @@ function grih(){
   git rebase -i HEAD~"$1"
 }
 
-# Get current git branch
-function gb(){
-  git branch | grep -v master | grep -v main | grep "\*" | awk '{print $2}'
-}
-
-# git pull -r $this_branch (allows master)
+# git pull -r $this_branch (allows master/main)
 function gp(){
-  git pull -r origin "$(gb)"
+  git pull -r origin "$(git branch | grep "\*" | awk '{print $2}')"
 }
 
-#git push origin $this_branch (does not allow master)
+#git push origin $this_branch (does not allow master/main)
 function gpo(){
-  git push origin "$(gb)"
+  git push origin "$(git branch | grep -v master | grep -v main | grep "\*" | awk '{print $2}')"
 }
 
 #git push --force origin $this_branch (does not allow master or main)
 function gfpo(){
-   git push --force origin "$(gb)"
+   git push --force origin "$(git branch | grep -v master | grep -v main | grep "\*" | awk '{print $2}')"
 }
 
 #git rebase origin main
@@ -53,7 +48,7 @@ function grom() {
 
 #git rebase origin $this_branch
 function gro() {
-  git rebase origin/"$(gb)"
+  git rebase origin/"$(git branch | grep -v master | grep -v main | grep "\*" | awk '{print $2}')"
 }
 
 #grab our changes from origin, add them, and continue rebase
