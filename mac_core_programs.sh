@@ -19,3 +19,6 @@ npm install -g git-fixit
 
 echo "Install golangci-lint"
 brew install golangci-lint
+
+echo "Installing protocol buffers"
+brew install protobuf
