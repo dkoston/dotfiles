@@ -21,6 +21,23 @@ function sdf() {
 
 
 # Git
+#get current git branch (other than master or main)
+function get_git_branch_not_master_main(){
+   git branch --show-current | grep -Ev ^master | grep -Ev ^main
+}
+
+# get current git branch (any) git 2.22+
+function get_git_branch() {
+  git branch --show-current
+}
+
+
+#git checkout -B
+function gchb(){
+   git checkout -B "$1"
+   git push -u origin "$1"
+}
+
 #git rebase HEAD~${n}
 function grih(){
   git rebase -i HEAD~"$1"
@@ -28,17 +45,17 @@ function grih(){
 
 # git pull -r $this_branch (allows master/main)
 function gp(){
-  git pull -r origin "$(git branch | grep "\*" | awk '{print $2}')"
+  git pull -r origin "$(get_git_branch)"
 }
 
 #git push origin $this_branch (does not allow master/main)
 function gpo(){
-  git push origin "$(git branch | grep -v master | grep -v main | grep "\*" | awk '{print $2}')"
+  git push origin "$(get_git_branch_not_master_main)"
 }
 
-#git push --force origin $this_branch (does not allow master or main)
+#git push --force origin $this_branch (does not allow master/main)
 function gfpo(){
-   git push --force origin "$(git branch | grep -v master | grep -v main | grep "\*" | awk '{print $2}')"
+   git push --force origin "$(get_git_branch_not_master_main)"
 }
 
 #git rebase origin main
@@ -46,9 +63,9 @@ function grom() {
   git rebase origin main
 }
 
-#git rebase origin $this_branch
+#git rebase origin $this_branch (does not allow master/main)
 function gro() {
-  git rebase origin/"$(git branch | grep -v master | grep -v main | grep "\*" | awk '{print $2}')"
+  git rebase origin/"$(get_git_branch_not_master_main)"
 }
 
 #grab our changes from origin, add them, and continue rebase
