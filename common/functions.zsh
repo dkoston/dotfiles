@@ -174,7 +174,7 @@ function docker_logs(){
     echo "available containers:"
     docker ps
   else
-   DOCKERID=$(docker ps | grep "$1" | awk '{print $1}' | head -n 1 2>&1)
+   DOCKERID=$(docker ps -a | grep "$1" | awk '{print $1}' | head -n 1 2>&1)
    docker logs --tail 50 -f "$DOCKERID"
   fi
 }
