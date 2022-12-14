@@ -1,5 +1,5 @@
 #Include Extras
-EXTRAS=~/dotfiles/zsh/extras
+EXTRAS=~/go/src/github.com/dkoston/dotfiles/zsh/extras
 if [ -f "$EXTRAS" ]; then
     source $EXTRAS
 else

@@ -3,7 +3,7 @@ alias e='exit'
 
 # I use df for my dotfiles
 alias ldf=$(which df)
-alias df='cd ~/dotfiles'
+alias df='cd ~/go/src/github.com/dkoston/dotfiles'
 
 # GMT all your dates
 alias date='date -u'

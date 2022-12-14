@@ -2,7 +2,7 @@
 function _cddf() {
     local cur opts
     cur="${COMP_WORDS[COMP_CWORD]}"
-    opts=$(cd ~/dotfiles || exit; ls -d * | sed 's|/./||')
+    opts=$(cd ~/go/src/github.com/dkoston/dotfiles || exit; ls -d * | sed 's|/./||')
     COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
 }
 
@@ -12,7 +12,7 @@ function sdf() {
   SHELL=$0
   if [[ "$SHELL" == "/bin/bash" ]]; then
     source ~/.bash_profile
-  elif [[ "$SHELL" == "/bin/zsh" ]]; then
+  elif [[ "$SHELL" == "/bin/zsh" || "$SHELL" == "/usr/bin/zsh" ]]; then
     source ~/.zprofile
   else
     echo "Shell ${SHELL} unsupported"

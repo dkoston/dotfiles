@@ -1,28 +1,38 @@
 # Add tab completion for many Bash commands
-BCPATH="$(brew --prefix)/etc/bash_completion"
-if which brew > /dev/null && [ -f "$BCPATH" ]; then
-	source "$BCPATH";
-	if [ -f "$BCPATH.d/git-prompt.sh" ]; then
-		source "$BCPATH.d/git-prompt.sh";
-	else
-		echo "WARNING. GIT NOT INSTALLED VIA HOMEBREW";
-		echo "INSTALLING";
-		brew uninstall bash-completion;
-		brew install git bash-completion;
-	fi
-else
-	echo "WARNING. BASH COMPLETION NOT INSTALLED.";
-	brew install git bash-completion;
-	exit;
+
+if [[ $OSTYPE == 'darwin'* ]]; then
+    BCPATH="$(brew --prefix)/etc/bash_completion"
+    if which brew > /dev/null && [ -f "$BCPATH" ]; then
+        source "$BCPATH";
+        if [ -f "$BCPATH.d/git-prompt.sh" ]; then
+            source "$BCPATH.d/git-prompt.sh";
+        else
+            echo "WARNING. GIT NOT INSTALLED VIA HOMEBREW";
+            echo "INSTALLING";
+            brew uninstall bash-completion;
+            brew install git bash-completion;
+        fi
+    else
+        echo "WARNING. BASH COMPLETION NOT INSTALLED.";
+        brew install git bash-completion;
+        exit;
+    fi;
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+    if [ -f "/etc/profile.d/bash_completion.sh" ]; then
+        source /etc/profile.d/bash_completion.sh
+        source /usr/share/bash-completion/completions/git
+    else
+       echo "WARNING. BASH COMPLETION NOT INSTALLED.";
+    fi;
 fi;
 
 # Load the shell dotfiles, and then some:
-for file in ${HOME}/dotfiles/common/{aliases,extras,environment,functions.zsh}; do
+for file in ${HOME}/go/src/github.com/dkoston/dotfiles/common/{aliases,extras,environment,functions.zsh}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 
-source "${HOME}/dotfiles/bash/autocomplete.sh"
-source "${HOME}/dotfiles/bash/prompt"
+source "${HOME}/go/src/github.com/dkoston/dotfiles/bash/autocomplete.sh"
+source "${HOME}/go/src/github.com/dkoston/dotfiles/bash/prompt"
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2- | tr ' ' '\n')" scp sftp ssh;

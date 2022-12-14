@@ -3,7 +3,7 @@
 # Bootstrap symlinks dotfiles to this repo so this repo can remain
 # the source of truth 
 
-if [[ "$SHELL" == "/bin/zsh" ]]; then
+if [[ "$SHELL" == "/bin/zsh" || "$SHELL" == "/usr/bin/zsh" ]]; then
   echo "Installing oh my ZSH"
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   echo "Installing ZSH custom files for oh my zsh"
