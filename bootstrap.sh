@@ -11,6 +11,7 @@ if [[ "$SHELL" == "/bin/zsh" || "$SHELL" == "/usr/bin/zsh" ]]; then
   ln -s "$(pwd)/common/environment" "${HOME}/.oh-my-zsh/custom/environment.zsh"
   ln -s "$(pwd)/common/functions.zsh" "${HOME}/.oh-my-zsh/custom/functions.zsh"
   ln -s "$(pwd)/zsh/autocomplete.zsh" "${HOME}/.oh-my-zsh/custom/autocomplete.zsh"
+  ln -s "$(pwd)/zsh/completions" "${HOME}/.oh-my-zsh/completions"
 elif [[ "$SHELL" == "/bin/bash" ]]; then
   echo "Installing BASH profile"
   ln -s "$(pwd)/bash/profile" "${HOME}/.bash_profile"

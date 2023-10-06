@@ -21,6 +21,15 @@ function sdf() {
 
 
 # Git
+function git_force_changes() {
+   make lint
+   git add .
+   gc -m "a"
+   git-fixit 2
+   gfpo
+}
+
+
 #get current git branch (other than master or main)
 function get_git_branch_not_master_main(){
    git branch --show-current | grep -Ev ^master | grep -Ev ^main
@@ -131,7 +140,7 @@ function docker_enter(){
 	    echo "available containers:"
 	    docker ps
     else
-	    DOCKERID=$(docker ps | grep "$1" | sed 's/|/ /' | awk '{print $1}' 2>&1)
+	    DOCKERID=$(docker ps | grep "$1\$" | sed 's/|/ /' | awk '{print $1}' 2>&1)
       docker exec -it "$DOCKERID" bash
     fi
 }
@@ -196,7 +205,7 @@ function docker_remove_all_images(){
 
 # remove all docker containers
 function docker_remove_all_containers(){
-  docker rm -f "$(docker ps -a -q)"
+  docker ps -a | grep -v 'IMAGE' | awk '{print $1}' | xargs docker rm -f
 }
 
 # remove all stopped docker containers

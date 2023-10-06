@@ -11,4 +11,8 @@ if [[ "$GOBIN" != "" ]]; then
     PATH=$PATH:$GOPATH/bin
 fi
 
-export PATH=$PATH:/usr/local/bin:/usr/local/sbin
+#nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/Cellar/nvm/0.39.5/libexec/nvm.sh" ] && \. "/opt/homebrew/Cellar/nvm/0.39.5/libexec/nvm.sh"
+
+export PATH=/opt/homebrew/bin:$PATH:/usr/local/bin:/usr/local/sbin:/Users/dave/.local/bin

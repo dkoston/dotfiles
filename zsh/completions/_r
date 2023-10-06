@@ -1,0 +1,6 @@
+#compdef r
+_r() {
+ _arguments "1: :($(ls /Users/dave/go/src/github.com/onrocketdotcom))"
+}
+
+_r "$@"
