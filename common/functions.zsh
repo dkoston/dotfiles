@@ -113,7 +113,7 @@ function docker_id(){
 	    echo "available containers:"
 	    docker ps
     else
-	    docker ps | grep "$1" | sed 's/|/ /' | awk '{print $1}'
+	    docker ps | grep "$1\$" | sed 's/|/ /' | awk '{print $1}'
     fi
 }
 
@@ -131,6 +131,9 @@ function docker_enter_id(){
     fi
 }
 
+
+
+
 #Enter a docker container by name or ID match (bash)
 function docker_enter(){
     if [[ "$1" == "" ]]; then
@@ -140,7 +143,7 @@ function docker_enter(){
 	    echo "available containers:"
 	    docker ps
     else
-	    DOCKERID=$(docker ps | grep "$1\$" | sed 's/|/ /' | awk '{print $1}' 2>&1)
+	    DOCKERID=$(docker_id "$1")
       docker exec -it "$DOCKERID" bash
     fi
 }
@@ -154,7 +157,7 @@ function docker_enter_alpine(){
 	    echo "available containers:"
 	    docker ps
     else
-	    DOCKERID=$(docker ps | grep "$1" | sed 's/|/ /' | awk '{print $1}' 2>&1)
+	    DOCKERID=$(docker_id "$1")
       docker exec -it "$DOCKERID" ash
     fi
 }
@@ -168,7 +171,7 @@ function docker_rm(){
     echo "available containers:"
     docker ps
   else
-    DOCKERID=$(docker ps | grep "$1" | sed 's/|/ /' | awk '{print $1}' 2>&1)
+    DOCKERID=$(docker_id "$1")
     docker rm -f "$DOCKERID"
   fi
 }
@@ -183,7 +186,7 @@ function docker_logs(){
     echo "available containers:"
     docker ps
   else
-   DOCKERID=$(docker ps -a | grep "$1" | awk '{print $1}' | head -n 1 2>&1)
+   DOCKERID=$(docker_id "$1")
    docker logs --tail 50 -f "$DOCKERID"
   fi
 }
