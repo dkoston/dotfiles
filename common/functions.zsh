@@ -1,3 +1,8 @@
+# Restart pboard when mac clipboard becomes unresponsive
+function fix_clipboard() {
+    sudo launchctl kickstart -k gui/501/com.apple.pboard
+}
+
 #Fast change to a sub-folder of dotfiles. Alias this to 'df' via autocomplete.sh
 function _cddf() {
     local cur opts
