@@ -27,7 +27,6 @@ function sdf() {
 
 # Git
 function git_force_changes() {
-   make lint
    git add .
    gc -m "a"
    git-fixit 2
@@ -194,6 +193,36 @@ function docker_logs(){
    DOCKERID=$(docker_id "$1")
    docker logs --tail 50 -f "$DOCKERID"
   fi
+}
+
+# Downgrade a homebrew package while maintaining the original one's name
+function brew_downgrade() {
+  package=$1
+  version=$2
+
+  local_tap="${USER}/local-${package}-${version}"
+
+  # uninstall current version of package
+  brew uninstall --ignore-dependencies "${package}"
+
+  # Create a local tap
+  brew tap-new "${local_tap}"
+
+  # Extract the old version's source into that tap
+  brew extract --version="${version}" "${package}" "${local_tap}"
+
+  # change dir for shorter commands
+  cd "$(brew --repository "${local_tap}"/Formula)" || exit
+
+  # rename the formula
+  mv "${package}"@"${version}" "${package}".rb
+
+  # Strip version from the package name
+  version_no_dots=${version/\./}
+  sed -i.bak "s/AT${version_no_dots}//" "${package}".rb
+
+  # Install this custom local tap
+  brew install "$(brew --repository "${local_tap}")/Formula/${package}.rb"
 }
 
 
