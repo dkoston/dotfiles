@@ -8,6 +8,11 @@ alias df='cd ~/go/src/github.com/dkoston/dotfiles'
 # GMT all your dates
 alias date='date -u'
 
+
+# clean up line endings in files in a dir
+alias clean_line_endings='find . -type f -print0 | xargs -0 dos2unix'
+
+
 # Docker
 alias de='docker_enter'
 alias dea='docker_enter_alpine'
@@ -19,6 +24,9 @@ alias dl='docker_logs'
 #Bash
 alias stripnewlines="tr -d '\n'"
 
+# curl
+alias curltime="curl -w \"@$HOME/.curl-format.txt\" -o /dev/null -s "
+
 # Helm
 alias hlem='helm'
 
@@ -28,6 +36,10 @@ alias nl='npm link .'
 alias ns='npm start'
 alias nt='npm test'
 alias nut='npm test:unit'
+
+# SSL Cipher check
+alias nmap_ciphers='nmap --script ~/ssl-enum-ciphers -p 443'
+
 
 # Golang
 alias gofmtall='gofmt -w ./.'
@@ -54,7 +66,7 @@ alias grs='git rebase --skip'
 alias gs='git status'
 alias gfi='git-fixit'
 alias gfl='git add . && gc -m "fixup last commit" && gfi 2 && gfpo'
-
+alias git_remove_untracked='git ls-files -z -o --exclude-standard | xargs -0 rm'
 
 #k8s
 alias kc='kubectl'

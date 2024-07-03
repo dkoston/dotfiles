@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Bootstrap symlinks dotfiles to this repo so this repo can remain
-# the source of truth 
+# the source of truth
 
 if [[ "$SHELL" == "/bin/zsh" || "$SHELL" == "/usr/bin/zsh" ]]; then
   echo "Installing oh my ZSH"
@@ -22,6 +22,15 @@ fi
 echo "Installing user level gitignore"
 ln -s "$(pwd)/git/gitignore" "${HOME}/.gitignore"
 git config --global core.excludesfile "${HOME}/.gitignore"
+
+echo "Installing command format files"
+ln -s "$(pwd)/curl-format.txt" "${HOME}/curl-format.txt"
+ln -s "$(pwd)/ssl-enum-ciphers.nse" "${HOME}/ssl-enum-cipers.nse"
+
+echo "Setting up GPG"
+if [ -r ~/.zshrc ]; then echo -e '\nexport GPG_TTY=$(tty)' >> ~/.zshrc; \
+  else echo -e '\nexport GPG_TTY=$(tty)' >> ~/.zprofile; fi
+
 
 echo "Setting up go for private github repos"
 git config --global url.git@github.com:.insteadOf https://github.com/

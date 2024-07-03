@@ -27,6 +27,7 @@ function sdf() {
 
 # Git
 function git_force_changes() {
+   make lint
    git add .
    gc -m "a"
    git-fixit 2

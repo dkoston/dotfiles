@@ -15,12 +15,11 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/Cellar/nvm/0.39.5/libexec/nvm.sh" ] && \. "/opt/homebrew/Cellar/nvm/0.39.5/libexec/nvm.sh"
 
-#gpg
-if [ -r ~/.zshrc ]; then echo -e '\nexport GPG_TTY=$(tty)' >> ~/.zshrc; \
-  else echo -e '\nexport GPG_TTY=$(tty)' >> ~/.zprofile; fi
-
 export ENV=local
 export PATH=/Users/dave/.local/bin:/opt/homebrew/bin:$PATH:/usr/local/bin:/usr/local/sbin:/Users/dave/.local/bin:/Users/dave/go/bin
 export PATH=$(pyenv root)/shims:$PATH
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
 eval "$(pyenv init -)"
+
+source ~/perl5/perlbrew/etc/bashrc
