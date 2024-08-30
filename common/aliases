@@ -20,6 +20,8 @@ alias dpa='docker ps -a'
 alias dps='docker ps'
 alias docker-stopped='docker ps -a | grep Exited'
 alias dl='docker_logs'
+alias docker_garbage_collect='docker system prune'
+
 
 #Bash
 alias stripnewlines="tr -d '\n'"
@@ -116,3 +118,6 @@ alias hidedeskicons="defaults write com.apple.finder CreateDesktop -bool false &
 
 # Allow installation of unregistered apps
 alias allowinstall="sudo spctl --master-disable"
+
+# Fix crashed Dock
+alias fixdock='killall Dock'

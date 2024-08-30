@@ -254,11 +254,6 @@ function docker_remove_stopped(){
   echo "All stopped containers removed"
 }
 
-# Delete all old unused containers and images
-function docker_garbage_collect(){
-  docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc spotify/docker-gc
-}
-
 #Remove all custom docker networks
 function docker_remove_networks(){
   for i in $(docker network ls -f type=custom | grep -v NAME | awk '{print $1}'); do

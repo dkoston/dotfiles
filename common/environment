@@ -18,7 +18,6 @@ export NVM_DIR="$HOME/.nvm"
 export ENV=local
 export PATH=/Users/dave/.local/bin:/opt/homebrew/bin:$PATH:/usr/local/bin:/usr/local/sbin:/Users/dave/.local/bin:/Users/dave/go/bin
 export PATH=$(pyenv root)/shims:$PATH
-export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
 eval "$(pyenv init -)"
 
